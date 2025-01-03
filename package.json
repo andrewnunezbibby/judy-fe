@@ -31,11 +31,11 @@
     "vite": "^6.0.5"
   },
   "lint-staged": {
-    "*.{ts, tsx}": [
+    "*.{ts,tsx}": [
       "eslint --fix",
       "prettier --write"
     ],
-    "*.{js, jsx}": [
+    "*.{js,jsx}": [
       "eslint --fix",
       "prettier --write"
     ],
