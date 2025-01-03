@@ -1,0 +1,17 @@
+{
+    "name": "Hello Extensions",
+    "description": "Base Level Extension",
+    "version": "1.0",
+    "manifest_version": 3,
+    "action": {
+      "default_popup": "/src/sidepanel/popup.html",
+      "default_icon": "/public/judy_icon1.png",
+      "default_title": "Click to open panel"
+    },
+    "permissions": [
+        "sidePanel"
+    ],
+    "side_panel": {
+        "default_path": "/src/sidepanel/sidepanel.html"
+    }
+  }
