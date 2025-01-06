@@ -20,7 +20,6 @@
     "@types/react-dom": "^18.3.5",
     "@vitejs/plugin-react-swc": "^3.5.0",
     "eslint": "^9.17.0",
-    "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.16",
     "globals": "^15.14.0",
@@ -32,24 +31,10 @@
     "vite": "^6.0.5"
   },
   "lint-staged": {
-    "*.{ts,tsx}": [
-      "eslint --fix",
-      "prettier --write"
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix"
     ],
-    "*.{js,jsx}": [
-      "eslint --fix",
-      "prettier --write"
-    ],
-    "*.css": [
-      "eslint --fix",
-      "prettier --write"
-    ],
-    "*.json": [
-      "eslint --fix",
-      "prettier --write"
-    ],
-    "*.html": [
-      "eslint --fix",
+    "*.{js,jsx,ts,tsx,css,json,html}": [
       "prettier --write"
     ]
   }
