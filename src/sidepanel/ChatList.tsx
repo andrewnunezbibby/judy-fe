@@ -1,5 +1,6 @@
 import ChatMessage from './ChatMessage';
-import { VStack } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
+import { useRef, useEffect } from 'react';
 
 const messages = [
   {
@@ -21,13 +22,21 @@ const messages = [
 ];
 
 const ChatList = () => {
+  const bottomRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (bottomRef.current) {
+      bottomRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, []);
   return (
-    <VStack className="h-5/6">
+    <Box>
       {messages.map((message, index) => {
         if (message.isChatMessage) return <ChatMessage key={`${index}_message`} messageText={message.text} variant="agent" />;
         return <ChatMessage key={`${index}_message`} messageText={message.text} variant="user" />;
       })}
-    </VStack>
+      <div ref={bottomRef}></div>
+    </Box>
   );
 };
 
