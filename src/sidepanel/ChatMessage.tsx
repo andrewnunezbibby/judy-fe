@@ -1,6 +1,13 @@
 import { Box, Flex } from '@chakra-ui/react';
 
-const ChatMessage = ({ messageText, variant }: { messageText: string; variant: string }) => {
+type MessageVariant = 'agent' | 'user';
+
+interface ChatMessageProps {
+  messageText: string;
+  variant: MessageVariant;
+}
+
+const ChatMessage = ({ messageText, variant }: ChatMessageProps) => {
   // https://dev.to/terenvelan/creating-variants-of-react-component-2b8m
   const flexAlignment = variant === 'agent' ? 'flex-start' : 'flex-end';
   const bgColor = variant === 'agent' ? 'teal.600' : 'blue.700';
