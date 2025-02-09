@@ -11,10 +11,14 @@ function getClickableElements() {
 }
 
 function findButton(text) {
-  const regex = new RegExp(text.replace(/[^a-zA-Z0-9]/g, ''), 'i');
+  if (typeof text !== 'string') return null;
+  const sanitizedText = text.slice(0, 100);
+  const regex = new RegExp(sanitizedText.replace(/[^a-zA-Z0-9]/g, ''), 'i');
 
   return Array.from(clickableElements).find((clickEl) => {
-    return regex.test(clickEl.textContent) || regex.test(clickEl.ariaLabel);
+    const content = (clickEl.textContent || '').slice(0, 100);
+    const label = (clickEl.ariaLabel || '').slice(0, 100);
+    return regex.test(content) || regex.test(label);
   });
 }
 
@@ -22,6 +26,9 @@ function highlightElement() {
   if (elementsToHighlight.length > 0 && currentElementIndex < elementsToHighlight.length) {
     getClickableElements();
     const element = findButton(elementsToHighlight[currentElementIndex]);
+    if (!element) {
+      console.error(`Element not found: ${elementsToHighlight[currentIndex]}`);
+    }
     element.style.border = '2px solid red';
 
     element.addEventListener('click', handleElementClick);
@@ -44,17 +51,10 @@ function setupElementsToHighlight(selectors) {
 }
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  console.log('STARTING', request.selectors);
   if (request.action === 'startGuide' && request.selectors) {
     setupElementsToHighlight(request.selectors);
   }
   return true;
-});
-
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  if (request.action === 'highlightElements' && request.selector) {
-    setupElementsToHighlight(request.selectors);
-  }
 });
 
 function updateCurrentIndex(index) {

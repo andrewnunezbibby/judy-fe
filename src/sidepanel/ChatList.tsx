@@ -7,7 +7,6 @@ const ChatList = () => {
   const bottomRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    console.log('LOADED');
     if (bottomRef.current) {
       bottomRef.current.scrollIntoView({ behavior: 'smooth' });
     }
