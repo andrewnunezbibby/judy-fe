@@ -15,4 +15,8 @@ export const Messages = [
     text: "Assuming you're using a popup or similar mechanism to include the SidePanel, your manifest might look something like this:",
     isChatMessage: false,
   },
+  {
+    text: 'I probably should change the name from isChatMessage to something like isAgentResp',
+    isChatMessage: true,
+  },
 ];

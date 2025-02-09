@@ -1,17 +1,25 @@
 {
-  "name": "Hello Extensions",
-  "description": "Base Level Extension",
+  "name": "Judy The Helper",
+  "description": "A webpage helper for people for when your computer savy kid is being a brat or isn't around",
   "version": "1.0",
   "manifest_version": 3,
   "action": {
     "default_icon": "public/judy_icon1.png",
     "default_title": "Click to open panel"
   },
-  "permissions": ["sidePanel"],
+  "permissions": ["sidePanel", "activeTab", "tabs"],
+  "host_permissions": ["<all_urls>"],
   "side_panel": {
     "default_path": "index.html"
   },
   "background": {
     "service_worker": "src/sidepanel/service-worker.js"
-  }
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://*/*"],
+      "js": ["src/sidepanel/content/contentScript.js"],
+      "run_at": "document_start"
+    }
+  ]
 }
