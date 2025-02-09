@@ -39,6 +39,7 @@ function handleElementClick() {
   this.style.border = '';
   this.removeEventListener('click', handleElementClick);
   currentElementIndex++;
+  updateCurrentIndex(currentElementIndex);
 
   setTimeout(() => {
     highlightElement();
@@ -47,6 +48,8 @@ function handleElementClick() {
 
 function setupElementsToHighlight(selectors) {
   elementsToHighlight = selectors;
+  currentElementIndex = 0;
+  updateCurrentIndex(currentElementIndex);
   highlightElement();
 }
 
@@ -58,9 +61,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 });
 
 function updateCurrentIndex(index) {
-  chrome.storage.local.set({ currentIndex: index }, () => {
-    console.log('Index updated');
-  });
+  chrome.storage.local.set({ currentIndex: index }, () => {});
 }
 
 function getCurrentIndex() {
